@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox (height: MediaQuery.of(context).size.height/2,
+            SizedBox (height: MediaQuery.of(context).size.height * 0.5,
               child: GridView.builder(
               shrinkWrap: true,
               itemCount: 220,
@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
              Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox (height: MediaQuery.of(context).size.height/2,
+                SizedBox (height: MediaQuery.of(context).size.height * 0.3,
                   child: GridView.builder(
                     shrinkWrap: true,
                     itemCount: 73,
@@ -66,6 +66,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
+            const SizedBox(height: 10,),
+           Row(
+             children: [
+             Column(children: [
+               SizedBox(width: 100, height: 50,
+                 child: ElevatedButton(onPressed: (){
+                   Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(0);
+                   setState(() {
+
+                 });},style: ElevatedButton.styleFrom(
+                 backgroundColor: Colors.green,
+             ), child: const Text('Resset'),),
+               )],),
+             Column(children: [],)
+           ],) 
           ],
         ),
       ),

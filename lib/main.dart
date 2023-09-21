@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grid_maker_bricks/provider_color.dart';
+import 'package:grid_maker_bricks/walls.dart';
 import 'package:provider/provider.dart';
 
 import 'color_list.dart';
@@ -29,9 +30,12 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
 
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
+BrickWalls brickWalls = BrickWalls();
 
 class _MyHomePageState extends State<MyHomePage> {
 
@@ -56,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
              Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox (height: MediaQuery.of(context).size.height * 0.3,
+                SizedBox (height: MediaQuery.of(context).size.height * 0.25,
                   child: GridView.builder(
                     shrinkWrap: true,
                     itemCount: 73,
@@ -67,20 +71,30 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             const SizedBox(height: 10,),
-           Row(
-             children: [
-             Column(children: [
-               SizedBox(width: 100, height: 50,
-                 child: ElevatedButton(onPressed: (){
-                   Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(0);
-                   setState(() {
+           Padding(
+             padding: const EdgeInsets.all(8.0),
+             child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+               children: [
+               Column(children: [
+                 SizedBox(width: 100, height: 40,
+                   child: ElevatedButton(onPressed: (){
+                     Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(0);
+                     setState(() {
 
-                 });},style: ElevatedButton.styleFrom(
-                 backgroundColor: Colors.green,
-             ), child: const Text('Resset'),),
-               )],),
-             Column(children: [],)
-           ],) 
+                   });},style: ElevatedButton.styleFrom(
+                   backgroundColor: Colors.green,
+               ), child: const Text('Resset'),),
+                 )],),
+               Column(children: [
+                 SizedBox(width: 100, height: 40,
+                   child: ElevatedButton(onPressed: (){
+                    brickWalls.saveWall();},style: ElevatedButton.styleFrom(
+                     backgroundColor: Colors.green,
+                   ), child: const Text('Save'),),
+                 )
+               ],)
+             ],),
+           )
           ],
         ),
       ),

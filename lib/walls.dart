@@ -43,17 +43,23 @@ class BrickWalls {
     int? wallNumber;
 
     column = (index % 11);
-    row = (index / 11).round();
+    row = (index / 11).floor();
+
+    print('$index $row $column');
 
     color = (Provider.of<BrickColorNumber>(context, listen: false).index);
     color != null ? color = color + 10 : color = 0;
 
     brickList[row][column] = color;
 
+  }
+
+  Future<void> saveWall() async {
+
     var prefs = await SharedPreferences.getInstance();
     wallNumber = prefs.getInt('wallNumber') ?? 0;
     prefs.setString('wall$wallNumber', jsonEncode(brickList));
-    prefs.setInt('wallNumber', wallNumber + 1);
+    prefs.setInt('wallNumber', wallNumber! + 1);
     jsonDecode(prefs.getString('wall$wallNumber') ?? '');
 
   }

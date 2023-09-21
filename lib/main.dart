@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 10,),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 20,right: 20, bottom: 15, top: 10),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(children: [
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         brickWalls.resetWall();
                         },style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
-                      ), child: const Text('Resset'),),
+                      ), child: const Text('Reset'),),
                     )],),
                   Column(children: [
                     SizedBox(width: 100, height: 40,

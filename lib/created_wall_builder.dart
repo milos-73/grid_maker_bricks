@@ -18,7 +18,9 @@ class CreatedWallBuilder extends StatelessWidget {
 
       return ListTile(
       shape: const BeveledRectangleBorder(side: BorderSide(color: Colors.black,width: 0.2)),
-      tileColor: HexColor(colorNumbers.getColor(wall?[(index / 11).floor()][index % 11])) ,
+      tileColor: (wall?[(index / 11).floor()][index % 11]) != 0
+      ? HexColor(colorNumbers.getColor((wall?[(index / 11).floor()][index % 11])-10))
+      : HexColor(colorNumbers.getColor(0)),
       //leading: Text('$index'),
       onTap: () {
       },

@@ -6,8 +6,10 @@ import 'package:provider/provider.dart';
 
 import 'color_list.dart';
 import 'grid_items.dart';
+import 'list_of_walla.dart';
 
 void main() {
+
   runApp(
       MultiProvider(providers: [
         ChangeNotifierProvider<BrickColorNumber>(create: (context) => BrickColorNumber())
@@ -44,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(actions: [
-        ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => const WallsItems(wallNumber: 1)));}, child: Text('List'))
+        ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => const ListWalls()));}, child: Text('List'))
       ],
         title: Text(widget.title),
       ),

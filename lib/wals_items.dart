@@ -55,6 +55,7 @@ class _WallsItemsState extends State<WallsItems> {
               padding: const EdgeInsets.all(8.0),
               child: GridView.builder(
                 shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: 220,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
                 itemBuilder: (context, index) => CreatedWallBuilder(index, snapshot.data),

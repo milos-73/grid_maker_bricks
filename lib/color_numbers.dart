@@ -204,7 +204,7 @@ class ColorNumbers {
         String brickColor = '#99371e';
         return brickColor;
 
-        case 64:
+      case 64:
         String brickColor = '#80321a';
         return brickColor;
       case 65:

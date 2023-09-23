@@ -106,6 +106,15 @@ class BrickWalls {
 
   }
 
+  Future<void> saveEditedWallAsNew() async {
+
+    var prefs = await SharedPreferences.getInstance();
+    wallNumber = prefs.getInt('wallNumber') ?? 0;
+    prefs.setString('wall$wallNumber', jsonEncode(editedBrickList));
+    prefs.setInt('wallNumber', wallNumber! + 1);
+    jsonDecode(prefs.getString('wall$wallNumber') ?? '');
+  }
+
   void resetWall(){
 
     brickList =

@@ -65,7 +65,7 @@ class _WallsItemsState extends State<WallsItems> {
           SizedBox(width: MediaQuery.of(context).size.width * 0.40,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-            ElevatedButton(onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => EditWall(wallNumber: widget.wallNumber))); },style: ElevatedButton.styleFrom(backgroundColor: Colors.amber) ,child: const Text('Edit'),),
+            ElevatedButton(onPressed: () { Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EditWall(wallNumber: widget.wallNumber))); },style: ElevatedButton.styleFrom(backgroundColor: Colors.amber) ,child: const Text('Edit'),),
             ElevatedButton(onPressed: () {  },style: ElevatedButton.styleFrom(backgroundColor: Colors.amber) ,child: const Text('Delete'),),
             ],
           ),

@@ -10,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'color_list.dart';
 import 'edit_wall_tiles.dart';
-import 'grid_items.dart';
 import 'list_of_walls.dart';
 
 class EditWall extends StatefulWidget {
@@ -74,7 +73,7 @@ class _EditWallState extends State<EditWall> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox (height: MediaQuery.of(context).size.height * 0.25,
+                SizedBox (height: MediaQuery.of(context).size.height * 0.20,
                   child: GridView.builder(
                     shrinkWrap: true,
                     itemCount: 73,
@@ -87,27 +86,52 @@ class _EditWallState extends State<EditWall> {
             const SizedBox(height: 10,),
             Padding(
               padding: const EdgeInsets.only(left: 20,right: 20, bottom: 15, top: 10),
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(children: [
-                    SizedBox(width: 100, height: 40,
-                      child: ElevatedButton(onPressed: (){
-                        Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(0);
-                        setState(() {});
-                        brickWalls.resetWall();
-                      },style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                      ), child: const Text('Reset'),),
-                    )],),
-                  Column(children: [
-                    SizedBox(width: 100, height: 40,
-                      child: ElevatedButton(onPressed: (){
-                        brickWalls.saveEditedWall(widget.wallNumber!);},style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                      ), child: const Text('Save'),),
-                    )
-                  ],)
-                ],),
+              child: SizedBox(width: MediaQuery.of(context).size.width,
+                child: Column(
+                  children: [
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(width: 130, height: 40,
+                          child: ElevatedButton(onPressed: (){
+                            brickWalls.saveEditedWallAsNew();},style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                          ), child: const Text('Save as new'),),
+                        ),
+
+                        SizedBox(width: 130, height: 40,
+                          child: ElevatedButton(onPressed: (){
+                            brickWalls.saveEditedWall(widget.wallNumber!);},style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                          ), child: const Text('Save'),),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 10,),
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(width: 130, height: 40,
+                          child: ElevatedButton(onPressed: (){
+                            Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(0);
+                            setState(() {});
+                            brickWalls.resetWall();
+                          },style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                          ), child: const Text('Reset'),),
+                        ),
+                        SizedBox(width: 130, height: 40,
+                          child: ElevatedButton(onPressed: (){
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));
+                          },style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blueAccent,
+                          ), child: const Text('Cancel'),),
+                        ),
+                      ],
+                    ),
+
+                  ],
+
+                ),
+              ),
             )
           ],
         ),

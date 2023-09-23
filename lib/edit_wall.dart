@@ -26,16 +26,46 @@ BrickWalls brickWalls = BrickWalls();
 
 List? colorsNumbers;
 
+List colorNumbersReset =
+[
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+];
+
+bool? reset = false;
+
 class _EditWallState extends State<EditWall> {
 
   Future<List?> getWallColors(int? wallNumber) async {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
     colorsNumbers = jsonDecode(prefs.getString('wall$wallNumber') ?? '');
+
+    //reset = false;
+
     return colorsNumbers;
   }
 
-  @override
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +76,7 @@ class _EditWallState extends State<EditWall> {
         child: Column(
           children: [
             FutureBuilder(
-              future: getWallColors(widget.wallNumber),
+              future:  getWallColors(widget.wallNumber),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
 
                 if (snapshot.hasData) {
@@ -56,7 +86,7 @@ class _EditWallState extends State<EditWall> {
                       shrinkWrap: true,
                       itemCount: 220,
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
-                      itemBuilder: (context, index) => EditWallTile(wallNumber: 1, index: index, colorNumber:
+                      itemBuilder: (context, index) => EditWallTile(wallNumber: widget.wallNumber, index: index, colorNumber:
                       (colorsNumbers?[(index / 11).floor()][index % 11]) !=0
                       ? ((colorsNumbers?[(index / 11).floor()][index % 11]) -10)
                       : 0,
@@ -69,6 +99,8 @@ class _EditWallState extends State<EditWall> {
               },
 
             ),
+
+
             const SizedBox(height: 10),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -111,10 +143,16 @@ class _EditWallState extends State<EditWall> {
                       children: [
                         SizedBox(width: 130, height: 40,
                           child: ElevatedButton(onPressed: (){
-                            Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(0);
-                            setState(() {});
-                            brickWalls.resetWall();
-                          },style: ElevatedButton.styleFrom(
+
+
+                            setState(() {
+                              colorsNumbers = colorNumbersReset;
+
+                            });
+
+                          },
+
+                            style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red,
                           ), child: const Text('Reset'),),
                         ),

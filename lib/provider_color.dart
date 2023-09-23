@@ -5,7 +5,6 @@ class BrickColorNumber extends ChangeNotifier {
 
   void setBrickColor(int? value,) {
     index = value;
-    print('INDEX PROVIDER 1? $index');
 
     notifyListeners();
   }

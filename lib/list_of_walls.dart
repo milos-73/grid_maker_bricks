@@ -11,12 +11,9 @@ class ListWalls extends StatefulWidget {
   State<ListWalls> createState() => _ListWallsState();
 }
 
-
-
 class _ListWallsState extends State<ListWalls> {
   SharedPreferences? prefs;
-
- int? wallsCount;
+  int? wallsCount;
 
   Future<void> loadPrefs() async {
     prefs = await SharedPreferences.getInstance();
@@ -25,7 +22,6 @@ class _ListWallsState extends State<ListWalls> {
  Future<void> wallsCountNumber() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int? count = prefs.getInt('wallNumber');
-    print('wallNumber: ${wallsCount}');
    setState(() {
      wallsCount = count;
    });
@@ -40,13 +36,11 @@ class _ListWallsState extends State<ListWalls> {
 
   @override
   Widget build(BuildContext context) {
-
-    print('Build: {$wallsCount}');
     return Scaffold(
       body: ListView.builder(
           itemCount: wallsCount,
           itemBuilder:(context,index){
-            return SizedBox(height:MediaQuery.of(context).size.height * 0.5,
+            return SizedBox(height:MediaQuery.of(context).size.height * 0.25,
                 child: WallsItems(wallNumber: index));
           }
       )

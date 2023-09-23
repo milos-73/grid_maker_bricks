@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'color_numbers.dart';
 import 'created_wall_builder.dart';
+import 'edit_wall.dart';
 
 
 class WallsItems extends StatefulWidget {
@@ -23,16 +24,10 @@ List? wall;
 
 class _WallsItemsState extends State<WallsItems> {
 
-
-
-  getWalldata(int? wallNumber) async {
-
-    print(widget.wallNumber);
+  getWallData(int? wallNumber) async {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print (prefs.getString('wall2'));
     wall = jsonDecode(prefs.getString('wall${widget.wallNumber}') ?? '');
-    print('getWALLData${widget.wallNumber}');
     return wall;
   }
 
@@ -46,20 +41,39 @@ class _WallsItemsState extends State<WallsItems> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: getWalldata(wallNumber),
+        future: getWallData(wallNumber),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
 
     if (snapshot.hasData) {
-      print('SNAPSHOT: ${snapshot.data}');
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 220,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
-                itemBuilder: (context, index) => CreatedWallBuilder(index, snapshot.data),
-              ),
+            return Row(mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(width: MediaQuery.of(context).size.width,
+                  child: Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left:10),
+                        child: SizedBox(width: MediaQuery.of(context).size.width * 0.47,
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: 220,
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
+                            itemBuilder: (context, index) => CreatedWallBuilder(index, snapshot.data),
+                          ),
+                        ),
+                      ),
+          SizedBox(width: MediaQuery.of(context).size.width * 0.40,
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+            ElevatedButton(onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => EditWall(wallNumber: widget.wallNumber))); },style: ElevatedButton.styleFrom(backgroundColor: Colors.amber) ,child: const Text('Edit'),),
+            ElevatedButton(onPressed: () {  },style: ElevatedButton.styleFrom(backgroundColor: Colors.amber) ,child: const Text('Delete'),),
+            ],
+          ),
+          ),
+                    ],
+                  ),
+                ),
+              ],
             );
           } else {
       return const CircularProgressIndicator();

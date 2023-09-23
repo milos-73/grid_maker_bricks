@@ -1,65 +1,71 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grid_maker_bricks/provider_color.dart';
 import 'package:grid_maker_bricks/walls.dart';
-import 'package:grid_maker_bricks/wals_items.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'color_list.dart';
+import 'edit_wall_tiles.dart';
 import 'grid_items.dart';
-import 'list_of_walls.dart';
 
-void main() {
+class EditWall extends StatefulWidget {
 
-  runApp(
-      MultiProvider(providers: [
-        ChangeNotifierProvider<BrickColorNumber>(create: (context) => BrickColorNumber())
-      ], child: const MyApp()));
-}
+  final int? wallNumber;
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Flutter Demo',
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
+  const EditWall({super.key, this.wallNumber});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<EditWall> createState() => _EditWallState();
 }
 
 BrickWalls brickWalls = BrickWalls();
 
-class _MyHomePageState extends State<MyHomePage> {
+List? colorsNumbers;
+
+class _EditWallState extends State<EditWall> {
+
+  Future<List?> getWallColors(int? wallNumber) async {
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    colorsNumbers = jsonDecode(prefs.getString('wall$wallNumber') ?? '');
+    return colorsNumbers;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(actions: [
-        ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => const ListWalls()));}, child: const Text('List'))
-      ],
-        title: Text(widget.title),
+      appBar: AppBar(
+      title: const Text('Edit Wall'),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox (height: MediaQuery.of(context).size.height * 0.5,
-              child: GridView.builder(
-                shrinkWrap: true,
-                itemCount: 220,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
-                itemBuilder: (context, index) => ItemTile(index),
-              ),
+            FutureBuilder(
+              future: getWallColors(widget.wallNumber),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+
+                if (snapshot.hasData) {
+                  brickWalls.updateEditedList(colorsNumbers);
+                  return SizedBox (height: MediaQuery.of(context).size.height * 0.5,
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      itemCount: 220,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
+                      itemBuilder: (context, index) => EditWallTile(wallNumber: 1, index: index, colorNumber:
+                      (colorsNumbers?[(index / 11).floor()][index % 11]) !=0
+                      ? ((colorsNumbers?[(index / 11).floor()][index % 11]) -10)
+                      : 0,
+                    ),
+                    )
+                  );
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              },
+
             ),
             const SizedBox(height: 10),
             Column(
@@ -86,14 +92,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(0);
                         setState(() {});
                         brickWalls.resetWall();
-                        },style: ElevatedButton.styleFrom(
+                      },style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
                       ), child: const Text('Reset'),),
                     )],),
                   Column(children: [
                     SizedBox(width: 100, height: 40,
                       child: ElevatedButton(onPressed: (){
-                        brickWalls.saveWall();},style: ElevatedButton.styleFrom(
+                        brickWalls.saveEditedWall(widget.wallNumber!);},style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
                       ), child: const Text('Save'),),
                     )

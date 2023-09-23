@@ -24,7 +24,6 @@ class _ColorListState extends State<ColorList> {
   void setColor(int index){
     setState(() {
       activeColor = index;
-      print (activeColor);
     });
 
     Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(index);

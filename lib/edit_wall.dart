@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:grid_maker_bricks/provider_color.dart';
 import 'package:grid_maker_bricks/walls.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'color_list.dart';
 import 'edit_wall_tiles.dart';
 import 'grid_items.dart';
+import 'list_of_walls.dart';
 
 class EditWall extends StatefulWidget {
 
@@ -39,6 +41,7 @@ class _EditWallState extends State<EditWall> {
     return Scaffold(
       appBar: AppBar(
       title: const Text('Edit Wall'),
+        leading: IconButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));} , icon: const FaIcon(FontAwesomeIcons.arrowLeft)),
       ),
       body: SingleChildScrollView(
         child: Column(

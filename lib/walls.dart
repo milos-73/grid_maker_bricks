@@ -4,7 +4,6 @@ import 'package:grid_maker_bricks/provider_color.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 List brickList =
   [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -57,7 +56,6 @@ List editedBrickList =
 
 class BrickWalls {
 
-
   Future<void> addBrickTypeToList(context, int index) async {
 
     int? row;
@@ -71,7 +69,6 @@ class BrickWalls {
     color != null && color != 0 ? color = color + 10 : color = 0;
 
     brickList[row][column] = color;
-
   }
 
   Future<void> addEditedBrickTypeToList(context, int index) async {
@@ -87,7 +84,6 @@ class BrickWalls {
     color != null && color != 0 ? color = color + 10 : color = 0;
 
     editedBrickList[row][column] = color;
-
   }
 
   Future<void> saveWall() async {
@@ -103,7 +99,6 @@ class BrickWalls {
 
     var prefs = await SharedPreferences.getInstance();
     prefs.setString('wall$wallNumber', jsonEncode(editedBrickList));
-
   }
 
   Future<void> saveEditedWallAsNew() async {

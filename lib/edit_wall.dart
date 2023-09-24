@@ -3,9 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:grid_maker_bricks/provider_color.dart';
 import 'package:grid_maker_bricks/walls.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'color_list.dart';
@@ -23,34 +21,7 @@ class EditWall extends StatefulWidget {
 }
 
 BrickWalls brickWalls = BrickWalls();
-
 List? colorsNumbers;
-
-List colorNumbersReset =
-[
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-];
-
-bool? reset = false;
 
 class _EditWallState extends State<EditWall> {
 
@@ -59,8 +30,6 @@ class _EditWallState extends State<EditWall> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     colorsNumbers = jsonDecode(prefs.getString('wall$wallNumber') ?? '');
-
-    //reset = false;
 
     return colorsNumbers;
   }
@@ -97,81 +66,96 @@ class _EditWallState extends State<EditWall> {
                   return const CircularProgressIndicator();
                 }
               },
-
             ),
 
-
             const SizedBox(height: 10),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox (height: MediaQuery.of(context).size.height * 0.20,
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    itemCount: 73,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
-                    itemBuilder: (context, index) => ColorList(index),
-                  ),
+            const ColorsGrid(),
+            const SizedBox(height: 10,),
+            EditButtons(widget: widget)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ColorsGrid extends StatelessWidget {
+  const ColorsGrid({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        SizedBox (height: MediaQuery.of(context).size.height * 0.20,
+          child: GridView.builder(
+            shrinkWrap: true,
+            itemCount: 73,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
+            itemBuilder: (context, index) => ColorList(index),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class EditButtons extends StatelessWidget {
+  const EditButtons({
+    super.key,
+    required this.widget,
+  });
+
+  final EditWall widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20,right: 20, bottom: 15, top: 10),
+      child: SizedBox(width: MediaQuery.of(context).size.width,
+        child: Column(
+          children: [
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(width: 130, height: 40,
+                  child: ElevatedButton(onPressed: (){
+                    brickWalls.saveEditedWallAsNew();},style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                  ), child: const Text('Save as new'),),
                 ),
+
+                SizedBox(width: 130, height: 40,
+                  child: ElevatedButton(onPressed: (){
+                    brickWalls.saveEditedWall(widget.wallNumber!);},style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                  ), child: const Text('Save'),),
+                )
               ],
             ),
             const SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.only(left: 20,right: 20, bottom: 15, top: 10),
-              child: SizedBox(width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: [
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(width: 130, height: 40,
-                          child: ElevatedButton(onPressed: (){
-                            brickWalls.saveEditedWallAsNew();},style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                          ), child: const Text('Save as new'),),
-                        ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(width: 130, height: 40,
+                  child: ElevatedButton(onPressed: (){},
 
-                        SizedBox(width: 130, height: 40,
-                          child: ElevatedButton(onPressed: (){
-                            brickWalls.saveEditedWall(widget.wallNumber!);},style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                          ), child: const Text('Save'),),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 10,),
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(width: 130, height: 40,
-                          child: ElevatedButton(onPressed: (){
-
-
-                            setState(() {
-                              colorsNumbers = colorNumbersReset;
-
-                            });
-
-                          },
-
-                            style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                          ), child: const Text('Reset'),),
-                        ),
-                        SizedBox(width: 130, height: 40,
-                          child: ElevatedButton(onPressed: (){
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));
-                          },style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueAccent,
-                          ), child: const Text('Cancel'),),
-                        ),
-                      ],
-                    ),
-
-                  ],
-
+                    style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                  ), child: const Text('Reset'),),
                 ),
-              ),
-            )
+                SizedBox(width: 130, height: 40,
+                  child: ElevatedButton(onPressed: (){
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));
+                  },style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                  ), child: const Text('Cancel'),),
+                ),
+              ],
+            ),
+
           ],
+
         ),
       ),
     );

@@ -41,7 +41,6 @@ class _EditWallTileState extends State<EditWallTile> {
       shape: const BeveledRectangleBorder(side: BorderSide(color: Colors.black,width: 0.2)),
       tileColor: _color == true ? HexColor(colorNumbers.getColor(widget.colorNumber!)) : HexColor(colorNumbers.getColor(Provider.of<BrickColorNumber>(context, listen: false).index ?? 0)),
 
-
       onTap: () {
         setState(() {_color = !_color!;});
         brickWalls.addEditedBrickTypeToList(context, widget.index);

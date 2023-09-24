@@ -17,7 +17,7 @@ class EditButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20,right: 20, bottom: 15, top: 10),
+      padding: const EdgeInsets.only(left: 20,right: 10, bottom: 15, top: 30),
       child: SizedBox(width: MediaQuery.of(context).size.width,
         child: Column(
           children: [

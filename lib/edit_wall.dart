@@ -28,11 +28,8 @@ List? colorsNumbers;
 class _EditWallState extends State<EditWall> {
 
   Future<List?> getWallColors(int? wallNumber) async {
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
     colorsNumbers = jsonDecode(prefs.getString('wall$wallNumber') ?? '');
-
     return colorsNumbers;
   }
 
@@ -44,37 +41,39 @@ class _EditWallState extends State<EditWall> {
         leading: IconButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));} , icon: const FaIcon(FontAwesomeIcons.arrowLeft)),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            FutureBuilder(
-              future:  getWallColors(widget.wallNumber),
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        child: Padding(
+          padding: const EdgeInsets.only(top: 10,left: 10,right: 10),
+          child: Column(
+            children: [
+              FutureBuilder(
+                future:  getWallColors(widget.wallNumber),
+                builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
 
-                if (snapshot.hasData) {
-                  brickWalls.updateEditedList(colorsNumbers);
-                  return SizedBox (height: MediaQuery.of(context).size.height * 0.5,
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      itemCount: 220,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
-                      itemBuilder: (context, index) => EditWallTile(wallNumber: widget.wallNumber, index: index, colorNumber:
-                      (colorsNumbers?[(index / 11).floor()][index % 11]) !=0
-                      ? ((colorsNumbers?[(index / 11).floor()][index % 11]) -10)
-                      : 0,
-                    ),
-                    )
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              },
-            ),
+                  if (snapshot.hasData) {
+                    brickWalls.updateEditedList(colorsNumbers);
+                    return SizedBox (height: MediaQuery.of(context).size.height * 0.5,
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        itemCount: 220,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
+                        itemBuilder: (context, index) => EditWallTile(wallNumber: widget.wallNumber, index: index, colorNumber:
+                        (colorsNumbers?[(index / 11).floor()][index % 11]) !=0
+                        ? ((colorsNumbers?[(index / 11).floor()][index % 11]) -10)
+                        : 0,
+                      ),
+                      )
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                },
+              ),
 
-            const SizedBox(height: 10),
-            const ColorsGrid(),
-            const SizedBox(height: 10,),
-            EditButtons(wallNumber: widget.wallNumber)
-          ],
+              //const SizedBox(height: 5),
+              const ColorsGrid(),
+              EditButtons(wallNumber: widget.wallNumber)
+            ],
+          ),
         ),
       ),
     );

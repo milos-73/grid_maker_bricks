@@ -51,56 +51,61 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox (height: MediaQuery.of(context).size.height * 0.5,
-              child: GridView.builder(
-                shrinkWrap: true,
-                itemCount: 220,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
-                itemBuilder: (context, index) => ItemTile(index),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox (height: MediaQuery.of(context).size.height * 0.25,
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    itemCount: 73,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
-                    itemBuilder: (context, index) => ColorList(index),
-                  ),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 10,left: 10,right: 10),
+          child: Column(
+            children: [
+              SizedBox (height: MediaQuery.of(context).size.height * 0.45,
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  itemCount: 220,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
+                  itemBuilder: (context, index) => ItemTile(index),
                 ),
-              ],
-            ),
-            const SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.only(left: 20,right: 20, bottom: 15, top: 10),
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(children: [
-                    SizedBox(width: 100, height: 40,
-                      child: ElevatedButton(onPressed: (){
-                        Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(0);
-                        setState(() {});
-                        brickWalls.resetWall();
-                        },style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                      ), child: const Text('Reset'),),
-                    )],),
-                  Column(children: [
-                    SizedBox(width: 100, height: 40,
-                      child: ElevatedButton(onPressed: (){
-                        brickWalls.saveWall();},style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                      ), child: const Text('Save'),),
-                    )
-                  ],)
-                ],),
-            )
-          ],
+              ),
+              //const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.only(top:30),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox (height: MediaQuery.of(context).size.height * 0.25,
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        itemCount: 73,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 1.5),
+                        itemBuilder: (context, index) => ColorList(index),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20,right: 20, bottom: 15, top: 20),
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(children: [
+                      SizedBox(width: 100, height: 40,
+                        child: ElevatedButton(onPressed: (){
+                          Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(0);
+                          setState(() {});
+                          brickWalls.resetWall();
+                          },style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                        ), child: const Text('Reset'),),
+                      )],),
+                    Column(children: [
+                      SizedBox(width: 100, height: 40,
+                        child: ElevatedButton(onPressed: (){
+                          brickWalls.saveWall();},style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                        ), child: const Text('Save'),),
+                      )
+                    ],)
+                  ],),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -17,7 +17,7 @@ class ColorsGrid extends StatelessWidget {
           child: GridView.builder(
             shrinkWrap: true,
             itemCount: 73,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 1.5),
             itemBuilder: (context, index) => ColorList(index),
           ),
         ),

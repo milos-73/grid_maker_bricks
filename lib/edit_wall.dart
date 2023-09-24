@@ -7,7 +7,6 @@ import 'package:grid_maker_bricks/walls.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'color_buttons.dart';
-import 'color_list.dart';
 import 'edit_wall_tiles.dart';
 import 'editor_buttons.dart';
 import 'list_of_walls.dart';

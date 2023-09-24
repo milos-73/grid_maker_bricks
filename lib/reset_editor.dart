@@ -27,23 +27,24 @@ class _ResetEditorState extends State<ResetEditor> {
         leading: IconButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));} , icon: const FaIcon(FontAwesomeIcons.arrowLeft)),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-              SizedBox (height: MediaQuery.of(context).size.height * 0.5,
-                      child: GridView.builder(
-                        shrinkWrap: true,
-                        itemCount: 220,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
-                        itemBuilder: (context, index) => EditWallTile(wallNumber: widget.wallNumber, index: index, colorNumber: 0,
-                        ),
-                     )
-            ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10,right: 10,top: 10),
+          child: Column(
+            children: [
+                SizedBox (height: MediaQuery.of(context).size.height * 0.5,
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                          itemCount: 220,
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 2),
+                          itemBuilder: (context, index) => EditWallTile(wallNumber: widget.wallNumber, index: index, colorNumber: 0,
+                          ),
+                       )
+              ),
 
-            const SizedBox(height: 10),
-            const ColorsGrid(),
-            const SizedBox(height: 10,),
-            EditButtons(wallNumber: widget.wallNumber)
-          ],
+              const ColorsGrid(),
+              EditButtons(wallNumber: widget.wallNumber)
+            ],
+          ),
         ),
       ),
     );

@@ -24,6 +24,7 @@ class EditWallTile extends StatefulWidget {
 
 class _EditWallTileState extends State<EditWallTile> {
 
+  List indexList = [5,16,27,38,49,60,71,82,93,104,115,126,137,148,159,170,181,192,203,214, 88,89,90,91,92,94,95,96,97,98,99,100,101,102,103,105,106,107,108,109];
   ColorNumbers colorNumbers = ColorNumbers();
   bool? _color;
   BrickWalls brickWalls = BrickWalls();
@@ -39,8 +40,11 @@ class _EditWallTileState extends State<EditWallTile> {
 
     return ListTile(
       shape: const BeveledRectangleBorder(side: BorderSide(color: Colors.black,width: 0.2)),
-      tileColor: _color == true ? HexColor(colorNumbers.getColor(widget.colorNumber!)) : HexColor(colorNumbers.getColor(Provider.of<BrickColorNumber>(context, listen: false).index ?? 0)),
-
+      tileColor: _color == true && Provider.of<BrickColorNumber>(context, listen: false).index == 0 && !indexList.contains(widget.index)
+          ? HexColor('#d6d6d4')
+          : _color == true && Provider.of<BrickColorNumber>(context, listen: false).index == 0 && indexList.contains(widget.index)
+          ? HexColor('#cececc')
+          : HexColor(colorNumbers.getColor(Provider.of<BrickColorNumber>(context, listen: false).index ?? 0)),
       onTap: () {
         setState(() {_color = !_color!;});
         brickWalls.addEditedBrickTypeToList(context, widget.index);

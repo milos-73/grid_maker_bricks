@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grid_maker_bricks/hex_color.dart';
 import 'package:grid_maker_bricks/provider_color.dart';
 import 'package:grid_maker_bricks/walls.dart';
 import 'package:grid_maker_bricks/wals_items.dart';
@@ -44,11 +45,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: HexColor('#ffe7d9'),
       appBar: AppBar(actions: [
-        ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => const ListWalls()));}, child: const Text('List'))
+        ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => const ListWalls()));}, style: ElevatedButton.styleFrom(backgroundColor: HexColor(('#2E5902'))),child: const Text('List'))
       ],
         title: Text(widget.title),
+        backgroundColor:HexColor('#214001'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -91,14 +93,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           setState(() {});
                           brickWalls.resetWall();
                           },style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
+                          backgroundColor: HexColor('#193C40'),
                         ), child: const Text('Reset'),),
                       )],),
                     Column(children: [
                       SizedBox(width: 100, height: 40,
                         child: ElevatedButton(onPressed: (){
                           brickWalls.saveWall();},style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
+                          backgroundColor: HexColor('#193C40'),
                         ), child: const Text('Save'),),
                       )
                     ],)

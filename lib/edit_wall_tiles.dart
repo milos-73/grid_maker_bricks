@@ -40,10 +40,12 @@ class _EditWallTileState extends State<EditWallTile> {
 
     return ListTile(
       shape: const BeveledRectangleBorder(side: BorderSide(color: Colors.black,width: 0.2)),
-      tileColor: _color == true && Provider.of<BrickColorNumber>(context, listen: false).index == 0 && !indexList.contains(widget.index)
+      tileColor: _color == true && Provider.of<BrickColorNumber>(context, listen: false).index == 0 && !indexList.contains(widget.index) && widget.colorNumber! == 0
           ? HexColor('#d6d6d4')
-          : _color == true && Provider.of<BrickColorNumber>(context, listen: false).index == 0 && indexList.contains(widget.index)
+          : _color == true && Provider.of<BrickColorNumber>(context, listen: false).index == 0 && indexList.contains(widget.index) && widget.colorNumber! == 0
           ? HexColor('#cececc')
+          : _color == true 
+          ? HexColor(colorNumbers.getColor(widget.colorNumber!)) 
           : HexColor(colorNumbers.getColor(Provider.of<BrickColorNumber>(context, listen: false).index ?? 0)),
       onTap: () {
         setState(() {_color = !_color!;});

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:grid_maker_bricks/wals_items.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'hex_color.dart';
+
 class ListWalls extends StatefulWidget {
 
   const ListWalls({super.key});
@@ -36,7 +38,7 @@ class _ListWallsState extends State<ListWalls> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(appBar: AppBar(title: const Text('List of boards'), backgroundColor:HexColor('#214001'),),backgroundColor: HexColor('#ffe7d9'),
       body: ListView.builder(
           itemCount: wallsCount,
           itemBuilder:(context,index){

@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'color_buttons.dart';
 import 'edit_wall_tiles.dart';
 import 'editor_buttons.dart';
+import 'hex_color.dart';
 import 'list_of_walls.dart';
 
 class EditWall extends StatefulWidget {
@@ -35,8 +36,8 @@ class _EditWallState extends State<EditWall> {
 
  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return Scaffold(backgroundColor: HexColor('#ffe7d9'),
+      appBar: AppBar(backgroundColor: HexColor('#214001'),
       title: const Text('Edit Wall'),
         leading: IconButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));} , icon: const FaIcon(FontAwesomeIcons.arrowLeft)),
       ),

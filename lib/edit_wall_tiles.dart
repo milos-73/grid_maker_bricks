@@ -24,7 +24,7 @@ class EditWallTile extends StatefulWidget {
 
 class _EditWallTileState extends State<EditWallTile> {
 
-  List indexList = [5,16,27,38,49,60,71,82,93,104,115,126,137,148,159,170,181,192,203,214, 88,89,90,91,92,94,95,96,97,98,99,100,101,102,103,105,106,107,108,109];
+  List indexList = [5,16,27,38,49,60,71,82,93,104,115,126,137,148,159,170,181,192,203,214,99,100,101,102,103,105,106,107,108,109,110,111,112,113,114,116,117,118,119,120];
   ColorNumbers colorNumbers = ColorNumbers();
   bool? _color;
   BrickWalls brickWalls = BrickWalls();
@@ -33,10 +33,12 @@ class _EditWallTileState extends State<EditWallTile> {
   void initState() {
     super.initState();
     _color = true;
-  }
+   }
 
   @override
   Widget build(BuildContext context) {
+
+
 
     return ListTile(
       shape: const BeveledRectangleBorder(side: BorderSide(color: Colors.black,width: 0.2)),

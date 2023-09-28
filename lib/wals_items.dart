@@ -51,8 +51,7 @@ class _WallsItemsState extends State<WallsItems> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder(
+    return FutureBuilder(
         future: getWallData(wallNumber),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
 
@@ -94,7 +93,7 @@ class _WallsItemsState extends State<WallsItems> {
       return const CircularProgressIndicator();
     }
         },
-             ),
+
     );
 }
 }

@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:grid_maker_bricks/walls.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'color_numbers.dart';
@@ -21,6 +23,7 @@ class WallsItems extends StatefulWidget {
 }
 
 List? wall;
+String? sharedWall;
 
 class _WallsItemsState extends State<WallsItems> {
 
@@ -31,6 +34,13 @@ class _WallsItemsState extends State<WallsItems> {
     return wall;
   }
 
+  shareWallData(int? wallNumber) async {
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    sharedWall = prefs.getString('wall${widget.wallNumber}') ?? "";
+    return sharedWall;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -39,8 +49,7 @@ class _WallsItemsState extends State<WallsItems> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder(
+    return FutureBuilder(
         future: getWallData(wallNumber),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
 
@@ -65,7 +74,10 @@ class _WallsItemsState extends State<WallsItems> {
           SizedBox(width: MediaQuery.of(context).size.width * 0.40,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+            Text('Board: ${widget.wallNumber! + 1}'),
+            const SizedBox(height: 10,),
             ElevatedButton(onPressed: () { Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EditWall(wallNumber: widget.wallNumber))); },style: ElevatedButton.styleFrom(backgroundColor: Colors.green) ,child: const Text('Edit'),),
+            IconButton(onPressed: () async {Share.share(await shareWallData(widget.wallNumber));}, icon: const FaIcon(FontAwesomeIcons.share))
             //ElevatedButton(onPressed: () {  },style: ElevatedButton.styleFrom(backgroundColor: Colors.amber) ,child: const Text('Delete'),),
             ],
           ),
@@ -79,7 +91,7 @@ class _WallsItemsState extends State<WallsItems> {
       return const CircularProgressIndicator();
     }
         },
-             ),
+
     );
 }
 }

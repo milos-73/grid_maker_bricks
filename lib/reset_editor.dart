@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'color_buttons.dart';
 import 'edit_wall_tiles.dart';
 import 'editor_buttons.dart';
+import 'hex_color.dart';
 import 'list_of_walls.dart';
 
 class ResetEditor extends StatefulWidget {
@@ -21,8 +22,9 @@ class _ResetEditorState extends State<ResetEditor> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: HexColor('#ffe7d9'),
       appBar: AppBar(
+        backgroundColor:HexColor('#214001'),
         title: const Text('Edit Wall'),
         leading: IconButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));} , icon: const FaIcon(FontAwesomeIcons.arrowLeft)),
       ),

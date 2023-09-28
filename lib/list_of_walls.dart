@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:grid_maker_bricks/wals_items.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'hex_color.dart';
 
 class ListWalls extends StatefulWidget {
 
@@ -36,7 +39,13 @@ class _ListWallsState extends State<ListWalls> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: HexColor('#ffe7d9'),
+        appBar: AppBar(
+        leading: IconButton(onPressed: (){Navigator.pop(context);} , icon: const FaIcon(FontAwesomeIcons.arrowLeft)),
+        title: const Text("List of created walls"),
+            backgroundColor:HexColor('#214001'),
+        ),
+
       body: ListView.builder(
           itemCount: wallsCount,
           itemBuilder:(context,index){

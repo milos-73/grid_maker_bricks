@@ -33,10 +33,12 @@ class _EditWallTileState extends State<EditWallTile> {
   void initState() {
     super.initState();
     _color = true;
-  }
+   }
 
   @override
   Widget build(BuildContext context) {
+
+
 
     return ListTile(
       shape: const BeveledRectangleBorder(side: BorderSide(color: Colors.black,width: 0.2)),

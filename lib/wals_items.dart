@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:grid_maker_bricks/provider_color.dart';
 import 'package:grid_maker_bricks/walls.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'color_numbers.dart';
@@ -65,7 +67,7 @@ class _WallsItemsState extends State<WallsItems> {
           SizedBox(width: MediaQuery.of(context).size.width * 0.40,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-            ElevatedButton(onPressed: () { Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EditWall(wallNumber: widget.wallNumber))); },style: ElevatedButton.styleFrom(backgroundColor: Colors.green) ,child: const Text('Edit'),),
+            ElevatedButton(onPressed: () { Provider.of<BrickColorNumber>(context, listen: false).index = 0; Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EditWall(wallNumber: widget.wallNumber))); },style: ElevatedButton.styleFrom(backgroundColor: Colors.green) ,child: const Text('Edit'),),
             //ElevatedButton(onPressed: () {  },style: ElevatedButton.styleFrom(backgroundColor: Colors.amber) ,child: const Text('Delete'),),
             ],
           ),

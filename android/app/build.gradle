@@ -24,12 +24,12 @@ if (flutterVersionName == null) {
 
 android {
     namespace "sk.saluspub.grid_maker_bricks"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdk 33
     ndkVersion flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {

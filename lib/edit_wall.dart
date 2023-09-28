@@ -29,6 +29,7 @@ class _EditWallState extends State<EditWall> {
   Future<List?> getWallColors(int? wallNumber) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     colorsNumbers = jsonDecode(prefs.getString('wall$wallNumber') ?? '');
+    print('COLOR NUMBERS>${colorsNumbers}');
     return colorsNumbers;
   }
 
@@ -50,6 +51,8 @@ class _EditWallState extends State<EditWall> {
 
                   if (snapshot.hasData) {
                     brickWalls.updateEditedList(colorsNumbers);
+                    print('DATA SNAPSHOT: ${snapshot.data}');
+                    print('DATA SNAPSHOT one: ${snapshot.data[(0 / 11).floor()][0 % 11]}');
                     return SizedBox (height: MediaQuery.of(context).size.height * 0.5,
                       child: GridView.builder(
                         shrinkWrap: true,

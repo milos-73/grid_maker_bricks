@@ -77,6 +77,8 @@ class _WallsItemsState extends State<WallsItems> {
           SizedBox(width: MediaQuery.of(context).size.width * 0.40,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+            Text('Board: ${widget.wallNumber! + 1}'),
+            const SizedBox(height: 10,),
             ElevatedButton(onPressed: () { Provider.of<BrickColorNumber>(context, listen: false).index = 0; Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EditWall(wallNumber: widget.wallNumber))); },style: ElevatedButton.styleFrom(backgroundColor: Colors.green) ,child: const Text('Edit'),),
             IconButton(onPressed: () async {Share.share(await shareWallData(widget.wallNumber));}, icon: const FaIcon(FontAwesomeIcons.share))
               //ElevatedButton(onPressed: () {  },style: ElevatedButton.styleFrom(backgroundColor: Colors.amber) ,child: const Text('Delete'),),

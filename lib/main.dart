@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Bricks breaker walls editor',
-      home: MyHomePage(title: 'Bricks breaker walls editor'),
+      home: MyHomePage(title: 'Bricks walls editor'),
     );
   }
 }
@@ -47,9 +47,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: HexColor('#ffe7d9'),
       appBar: AppBar(actions: [
-        ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => const ListWalls()));}, style: ElevatedButton.styleFrom(backgroundColor: HexColor(('#2E5902'))),child: const Text('List'))
+        Padding(
+          padding: const EdgeInsets.only(right: 10,bottom: 5),
+          child: ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => const ListWalls()));},
+              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),backgroundColor: HexColor(('#2E5902'))),child: const Text('List', style: TextStyle(color: Colors.white70),)),
+        )
       ],
-        title: Text(widget.title),
+        title: Text(widget.title,style: TextStyle(color: Colors.white70),),
         backgroundColor:HexColor('#214001'),
       ),
       body: SingleChildScrollView(
@@ -92,18 +96,16 @@ class _MyHomePageState extends State<MyHomePage> {
                           Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(0);
                           setState(() {});
                           brickWalls.resetWall();
-                          },style: ElevatedButton.styleFrom(
-                          backgroundColor: HexColor('#193C40'),
-                        ), child: const Text('Reset'),),
+                          },
+                            style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),backgroundColor: HexColor(('#193C40'))),child: const Text('Reset', style: TextStyle(color: Colors.white70),)),
                       )],),
                     Column(children: [
                       SizedBox(width: 100, height: 40,
                         child: ElevatedButton(onPressed: (){
-                          brickWalls.saveWall();},style: ElevatedButton.styleFrom(
-                          backgroundColor: HexColor('#193C40'),
-                        ), child: const Text('Save'),),
-                      )
-                    ],)
+                          brickWalls.saveWall();},
+                            style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),backgroundColor: HexColor(('#193C40'))),child: const Text('Save', style: TextStyle(color: Colors.white70),)),
+                        ),
+                      ],)
                   ],),
               )
             ],

@@ -52,7 +52,7 @@ class _EditWallState extends State<EditWall> {
 
                   if (snapshot.hasData) {
                     brickWalls.updateEditedList(colorsNumbers);
-                    return SizedBox (height: MediaQuery.of(context).size.height * 0.5,
+                    return SizedBox (height: MediaQuery.of(context).size.height * 0.48,
                       child: GridView.builder(
                         shrinkWrap: true,
                         itemCount: 220,

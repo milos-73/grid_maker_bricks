@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: GridView.builder(
                         shrinkWrap: true,
                         itemCount: 73,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 1.5),
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 1.3, mainAxisSpacing: 0.6, crossAxisSpacing: 0.6),
                         itemBuilder: (context, index) => ColorList(index),
                       ),
                     ),

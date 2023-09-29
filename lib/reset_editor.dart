@@ -32,7 +32,7 @@ class _ResetEditorState extends State<ResetEditor> {
           padding: const EdgeInsets.only(left: 10,right: 10,top: 10),
           child: Column(
             children: [
-                SizedBox (height: MediaQuery.of(context).size.height * 0.5,
+                SizedBox (height: MediaQuery.of(context).size.height * 0.48,
                         child: GridView.builder(
                           shrinkWrap: true,
                           itemCount: 220,

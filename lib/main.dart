@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:grid_maker_bricks/hex_color.dart';
 import 'package:grid_maker_bricks/provider_color.dart';
 import 'package:grid_maker_bricks/walls.dart';
-import 'package:grid_maker_bricks/wals_items.dart';
 import 'package:provider/provider.dart';
 
 import 'color_list.dart';
@@ -53,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),backgroundColor: HexColor(('#2E5902'))),child: const Text('List', style: TextStyle(color: Colors.white70),)),
         )
       ],
-        title: Text(widget.title,style: TextStyle(color: Colors.white70),),
+        title: Text(widget.title,style: const TextStyle(color: Colors.white70),),
         backgroundColor:HexColor('#214001'),
       ),
       body: SingleChildScrollView(

@@ -169,4 +169,10 @@ class BrickWalls {
     editedBrickList = editedList ?? [];
   }
 
+  Future<void> countNumberOfBricks(context) async {
+    print(brickList.where((element) => element !=0).length);
+
+    Provider.of<BrickColorNumber>(context, listen: false).countBricks(brickList.where((element) => element !=0).length);
+  }
+
 }

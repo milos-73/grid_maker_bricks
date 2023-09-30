@@ -42,6 +42,7 @@ class _ItemTileState extends State<ItemTile> {
       onTap: () {
         setState(() {_color = !_color!;});
         brickWalls.addBrickTypeToList(context, widget.itemNo);
+        brickWalls.countNumberOfBricks(context);
       },
     );
   }

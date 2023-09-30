@@ -48,8 +48,14 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(actions: [
         Padding(
           padding: const EdgeInsets.only(right: 10,bottom: 5),
-          child: ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => const ListWalls()));},
-              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),backgroundColor: HexColor(('#2E5902'))),child: const Text('List', style: TextStyle(color: Colors.white70),)),
+          child: Row(
+            children: [
+              Text('Bricks: ${Provider.of<BrickColorNumber>(context, listen: false).bricksCount} '),
+              const SizedBox(width: 10,),
+              ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => const ListWalls()));},
+                  style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),backgroundColor: HexColor(('#2E5902'))),child: const Text('List', style: TextStyle(color: Colors.white70),)),
+            ],
+          ),
         )
       ],
         title: Text(widget.title,style: const TextStyle(color: Colors.white70),),

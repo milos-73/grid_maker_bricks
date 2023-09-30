@@ -170,7 +170,6 @@ class BrickWalls {
   }
 
   Future<void> countNumberOfBricks(context) async {
-    print(brickList.where((element) => element !=0).length);
 
     var i = 0;
     for(var x in brickList) {

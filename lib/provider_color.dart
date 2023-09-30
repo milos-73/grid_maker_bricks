@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 class BrickColorNumber extends ChangeNotifier {
   int? index = 0;
   int bricksCount = 0;
+  int bricksEditedWallCount = 0;
 
   void setBrickColor(int? value,) {
     index = value;
@@ -13,7 +14,11 @@ class BrickColorNumber extends ChangeNotifier {
   void countBricks(int value,) {
     bricksCount = value;
 
-    print('NUMBER: $value');
+    notifyListeners();
+  }
+
+  void countBricksOnEditedWall(int value,) {
+    bricksCount = value;
 
     notifyListeners();
   }

@@ -27,6 +27,8 @@ class WallsItems extends StatefulWidget {
 
 List? wall;
 String? sharedWall;
+int bricksNumber = 0;
+int savedBricksCount = 0;
 
 class _WallsItemsState extends State<WallsItems> {
 
@@ -34,8 +36,36 @@ class _WallsItemsState extends State<WallsItems> {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     wall = jsonDecode(prefs.getString('wall${widget.wallNumber}') ?? '');
+
     return wall;
   }
+
+  Future<int> countBricks(List wall) async {
+
+ var count = 0;
+    for(var x in wall) {
+      for (var y in x){
+        if (y != 0) {
+          count = count + 1;
+        }
+      }
+    }
+    bricksNumber = count;
+
+   SharedPreferences prefs = await SharedPreferences.getInstance();
+   prefs.setInt('brickCountOnWall${widget.wallNumber}', count);
+
+
+    return bricksNumber;
+    }
+
+    Future<int> getBricksNumber(int wallNumber) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      savedBricksCount = prefs.getInt('brickCountOnWall${widget.wallNumber}') ?? 0;
+
+      return savedBricksCount;
+
+    }
 
   shareWallData(int? wallNumber) async {
 
@@ -47,6 +77,7 @@ class _WallsItemsState extends State<WallsItems> {
   @override
   void initState() {
     super.initState();
+
     //getWalldata(widget.wallNumber).then((value) => setState(() {wall = value;}));
   }
 
@@ -57,6 +88,8 @@ class _WallsItemsState extends State<WallsItems> {
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
 
     if (snapshot.hasData) {
+            countBricks(snapshot.data!);
+
             return Row(mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(width: MediaQuery.of(context).size.width,
@@ -78,8 +111,9 @@ class _WallsItemsState extends State<WallsItems> {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center,
             children: [
             Text('Board: ${widget.wallNumber! + 1}'),
+            Text('Bricks: $bricksNumber'),
             const SizedBox(height: 10,),
-            ElevatedButton(onPressed: () { Provider.of<BrickColorNumber>(context, listen: false).index = 0; Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EditWall(wallNumber: widget.wallNumber))); },style: ElevatedButton.styleFrom(backgroundColor: HexColor('#193C40')) ,child: const Text('Edit', style: TextStyle(color: Colors.white70),),),
+            ElevatedButton(onPressed: () async { Provider.of<BrickColorNumber>(context, listen: false).index = 0; getBricksNumber(widget.wallNumber!).then((value) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EditWall(wallNumber: widget.wallNumber, bricksCount: savedBricksCount))));},style: ElevatedButton.styleFrom(backgroundColor: HexColor('#193C40')) ,child: const Text('Edit', style: TextStyle(color: Colors.white70),),),
             IconButton(onPressed: () async {Share.share(await shareWallData(widget.wallNumber));}, icon: FaIcon(FontAwesomeIcons.share, color: HexColor('#A62B1F'),))
               //ElevatedButton(onPressed: () {  },style: ElevatedButton.styleFrom(backgroundColor: Colors.amber) ,child: const Text('Delete'),),
             ],

@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:grid_maker_bricks/provider_color.dart';
 import 'package:grid_maker_bricks/walls.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'color_buttons.dart';
@@ -15,14 +17,16 @@ import 'list_of_walls.dart';
 class EditWall extends StatefulWidget {
 
   final int? wallNumber;
+  final int? bricksCount;
 
-  const EditWall({super.key, this.wallNumber});
+  const EditWall({super.key, this.wallNumber, this.bricksCount});
 
   @override
   State<EditWall> createState() => _EditWallState();
 }
 
 BrickWalls brickWalls = BrickWalls();
+
 List? colorsNumbers;
 
 class _EditWallState extends State<EditWall> {
@@ -36,7 +40,12 @@ class _EditWallState extends State<EditWall> {
  @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: HexColor('#ffe7d9'),
-      appBar: AppBar(backgroundColor: HexColor('#214001'),
+      appBar: AppBar(backgroundColor: HexColor('#214001'), actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 15),
+          child: Text('Bricks: ${widget.bricksCount}',style: const TextStyle(color: Colors.white70),),
+        ),
+      ],
       title: const Text('Edit Wall', style: TextStyle(color: Colors.white70),),
         leading: IconButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));} , icon: const FaIcon(FontAwesomeIcons.arrowLeft, color: Colors.white70,size: 15,)),
       ),

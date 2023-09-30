@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:grid_maker_bricks/hex_color.dart';
 import 'package:grid_maker_bricks/provider_color.dart';
 import 'package:grid_maker_bricks/walls.dart';
-import 'package:grid_maker_bricks/wals_items.dart';
 import 'package:provider/provider.dart';
 
 import 'color_list.dart';
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Bricks breaker walls editor',
-      home: MyHomePage(title: 'Bricks breaker walls editor'),
+      home: MyHomePage(title: 'Bricks walls editor'),
     );
   }
 }
@@ -47,9 +46,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: HexColor('#ffe7d9'),
       appBar: AppBar(actions: [
-        ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => const ListWalls()));}, style: ElevatedButton.styleFrom(backgroundColor: HexColor(('#2E5902'))),child: const Text('List'))
+        Padding(
+          padding: const EdgeInsets.only(right: 10,bottom: 5),
+          child: ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => const ListWalls()));},
+              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),backgroundColor: HexColor(('#2E5902'))),child: const Text('List', style: TextStyle(color: Colors.white70),)),
+        )
       ],
-        title: Text(widget.title),
+        title: Text(widget.title,style: const TextStyle(color: Colors.white70),),
         backgroundColor:HexColor('#214001'),
       ),
       body: SingleChildScrollView(
@@ -75,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: GridView.builder(
                         shrinkWrap: true,
                         itemCount: 73,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 1.5),
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 11, childAspectRatio: 1.3, mainAxisSpacing: 0.6, crossAxisSpacing: 0.6),
                         itemBuilder: (context, index) => ColorList(index),
                       ),
                     ),
@@ -92,18 +95,16 @@ class _MyHomePageState extends State<MyHomePage> {
                           Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(0);
                           setState(() {});
                           brickWalls.resetWall();
-                          },style: ElevatedButton.styleFrom(
-                          backgroundColor: HexColor('#193C40'),
-                        ), child: const Text('Reset'),),
+                          },
+                            style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),backgroundColor: HexColor(('#193C40'))),child: const Text('Reset', style: TextStyle(color: Colors.white70),)),
                       )],),
                     Column(children: [
                       SizedBox(width: 100, height: 40,
                         child: ElevatedButton(onPressed: (){
-                          brickWalls.saveWall();},style: ElevatedButton.styleFrom(
-                          backgroundColor: HexColor('#193C40'),
-                        ), child: const Text('Save'),),
-                      )
-                    ],)
+                          brickWalls.saveWall();},
+                            style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),backgroundColor: HexColor(('#193C40'))),child: const Text('Save', style: TextStyle(color: Colors.white70),)),
+                        ),
+                      ],)
                   ],),
               )
             ],

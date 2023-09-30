@@ -30,16 +30,16 @@ class _EditWallState extends State<EditWall> {
   Future<List?> getWallColors(int? wallNumber) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     colorsNumbers = jsonDecode(prefs.getString('wall$wallNumber') ?? '');
+    print('COLOR NUMBERS>${colorsNumbers}');
     return colorsNumbers;
   }
 
  @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: HexColor('#ffe7d9'),
-      appBar: AppBar(
-      title: const Text('Edit Wall'),
-        backgroundColor:HexColor('#214001'),
-        leading: IconButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));} , icon: const FaIcon(FontAwesomeIcons.arrowLeft)),
+      appBar: AppBar(backgroundColor: HexColor('#214001'),
+      title: const Text('Edit Wall', style: TextStyle(color: Colors.white70),),
+        leading: IconButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));} , icon: const FaIcon(FontAwesomeIcons.arrowLeft, color: Colors.white70,size: 15,)),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -52,7 +52,7 @@ class _EditWallState extends State<EditWall> {
 
                   if (snapshot.hasData) {
                     brickWalls.updateEditedList(colorsNumbers);
-                    return SizedBox (height: MediaQuery.of(context).size.height * 0.5,
+                    return SizedBox (height: MediaQuery.of(context).size.height * 0.48,
                       child: GridView.builder(
                         shrinkWrap: true,
                         itemCount: 220,

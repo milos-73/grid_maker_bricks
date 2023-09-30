@@ -39,13 +39,9 @@ class _ListWallsState extends State<ListWalls> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: HexColor('#ffe7d9'),
-        appBar: AppBar(
-        leading: IconButton(onPressed: (){Navigator.pop(context);} , icon: const FaIcon(FontAwesomeIcons.arrowLeft)),
-        title: const Text("List of created walls"),
-            backgroundColor:HexColor('#214001'),
-        ),
-
+    return Scaffold(appBar: AppBar(
+      leading: IconButton(onPressed: (){Navigator.pop(context);} , icon: const FaIcon(FontAwesomeIcons.arrowLeft, color: Colors.white70,size: 15,)),
+      title: const Text('List of boards', style: TextStyle(color: Colors.white70),), backgroundColor:HexColor('#214001'),),backgroundColor: HexColor('#ffe7d9'),
       body: ListView.builder(
           itemCount: wallsCount,
           itemBuilder:(context,index){

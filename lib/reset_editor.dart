@@ -23,17 +23,16 @@ class _ResetEditorState extends State<ResetEditor> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: HexColor('#ffe7d9'),
-      appBar: AppBar(
-        backgroundColor:HexColor('#214001'),
-        title: const Text('Edit Wall'),
-        leading: IconButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));} , icon: const FaIcon(FontAwesomeIcons.arrowLeft)),
+      appBar: AppBar(backgroundColor: HexColor('#214001'),
+        title: const Text('Edit Wall',style: TextStyle(color: Colors.white70),),
+        leading: IconButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));} , icon: const FaIcon(FontAwesomeIcons.arrowLeft, color: Colors.white70,size: 15,)),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 10,right: 10,top: 10),
           child: Column(
             children: [
-                SizedBox (height: MediaQuery.of(context).size.height * 0.5,
+                SizedBox (height: MediaQuery.of(context).size.height * 0.48,
                         child: GridView.builder(
                           shrinkWrap: true,
                           itemCount: 220,

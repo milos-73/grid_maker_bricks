@@ -28,6 +28,7 @@ class _ColorListState extends State<ColorList> {
 
     Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(index);
 
+
   }
 
   @override

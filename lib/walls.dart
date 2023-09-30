@@ -172,7 +172,17 @@ class BrickWalls {
   Future<void> countNumberOfBricks(context) async {
     print(brickList.where((element) => element !=0).length);
 
-    Provider.of<BrickColorNumber>(context, listen: false).countBricks(brickList.where((element) => element !=0).length);
-  }
+    var i = 0;
+    for(var x in brickList) {
+      for (var y in x){
+        if (y != 0) {
+          i = i + 1;
+        }
+      }
+    }
+    Provider.of<BrickColorNumber>(context, listen: false).countBricks(i);
+}
+
+
 
 }

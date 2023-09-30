@@ -101,6 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Column(children: [
                       SizedBox(width: 100, height: 40,
                         child: ElevatedButton(onPressed: (){
+                          Provider.of<BrickColorNumber>(context,listen: false).bricksCount = 0;
                           Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(0);
                           setState(() {});
                           brickWalls.resetWall();

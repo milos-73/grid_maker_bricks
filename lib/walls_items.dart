@@ -62,9 +62,7 @@ class _WallsItemsState extends State<WallsItems> {
     Future<int> getBricksNumber(int wallNumber) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       savedBricksCount = prefs.getInt('brickCountOnWall${widget.wallNumber}') ?? 0;
-
       return savedBricksCount;
-
     }
 
   shareWallData(int? wallNumber) async {
@@ -77,8 +75,6 @@ class _WallsItemsState extends State<WallsItems> {
   @override
   void initState() {
     super.initState();
-
-    //getWalldata(widget.wallNumber).then((value) => setState(() {wall = value;}));
   }
 
   @override

@@ -37,14 +37,23 @@ class _EditWallState extends State<EditWall> {
     return colorsNumbers;
   }
 
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<BrickColorNumber>(context, listen: false).bricksEditedWallCount = widget.bricksCount ?? 0;
+  }
+
  @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: HexColor('#ffe7d9'),
       appBar: AppBar(backgroundColor: HexColor('#214001'), actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 15),
-          child: Text('Bricks: ${widget.bricksCount}',style: const TextStyle(color: Colors.white70),),
-        ),
+
+          Consumer<BrickColorNumber>(builder: (context, value, child){
+            return Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: Text('Bricks: ${value.bricksEditedWallCount}', style: const TextStyle(color: Colors.white70),),
+            );}),
+
       ],
       title: const Text('Edit Wall', style: TextStyle(color: Colors.white70),),
         leading: IconButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));} , icon: const FaIcon(FontAwesomeIcons.arrowLeft, color: Colors.white70,size: 15,)),

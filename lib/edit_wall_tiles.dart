@@ -52,6 +52,7 @@ class _EditWallTileState extends State<EditWallTile> {
       onTap: () {
         setState(() {_color = !_color!;});
         brickWalls.addEditedBrickTypeToList(context, widget.index);
+        brickWalls.countNumberOfBricksOnEditedWall(context);
       },
     );
   }

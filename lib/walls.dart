@@ -182,6 +182,19 @@ class BrickWalls {
     Provider.of<BrickColorNumber>(context, listen: false).countBricks(i);
 }
 
+  Future<void> countNumberOfBricksOnEditedWall(context) async {
+
+    var i = 0;
+    for(var x in editedBrickList) {
+      for (var y in x){
+        if (y != 0) {
+          i = i + 1;
+        }
+      }
+    }
+    Provider.of<BrickColorNumber>(context, listen: false).countBricksOnEditedWall(i);
+  }
+
 
 
 }

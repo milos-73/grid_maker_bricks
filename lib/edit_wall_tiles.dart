@@ -27,12 +27,14 @@ class _EditWallTileState extends State<EditWallTile> {
   List indexList = [5,16,27,38,49,60,71,82,93,104,115,126,137,148,159,170,181,192,203,214,99,100,101,102,103,105,106,107,108,109,110,111,112,113,114,116,117,118,119,120];
   ColorNumbers colorNumbers = ColorNumbers();
   bool? _color;
+  bool? _inicialization;
   BrickWalls brickWalls = BrickWalls();
 
  @override
   void initState() {
     super.initState();
     _color = true;
+    _inicialization = true;
    }
 
   @override
@@ -46,13 +48,20 @@ class _EditWallTileState extends State<EditWallTile> {
           ? HexColor('#d6d6d4')
           : _color == true && Provider.of<BrickColorNumber>(context, listen: false).index == 0 && indexList.contains(widget.index) && widget.colorNumber! == 0
           ? HexColor('#cececc')
-          : _color == true 
+          : _color == true && _inicialization == true
           ? HexColor(colorNumbers.getColor(widget.colorNumber!)) 
           : HexColor(colorNumbers.getColor(Provider.of<BrickColorNumber>(context, listen: false).index ?? 0)),
       onTap: () {
+        print('_color: ${_color}');
+        _inicialization = false;
         setState(() {_color = !_color!;});
         brickWalls.addEditedBrickTypeToList(context, widget.index);
         brickWalls.countNumberOfBricksOnEditedWall(context);
+
+        print('widget.colorNumber: ${widget.colorNumber}');
+        print('_color: ${_color}');
+        print('Provider.of<BrickColorNumber>(context, listen: false).index: ${Provider.of<BrickColorNumber>(context, listen: false).index}');
+
       },
     );
   }

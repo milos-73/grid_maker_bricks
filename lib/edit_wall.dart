@@ -51,7 +51,11 @@ class _EditWallState extends State<EditWall> {
           Consumer<BrickColorNumber>(builder: (context, value, child){
             return Padding(
               padding: const EdgeInsets.only(right: 15),
-              child: Text('Bricks: ${value.bricksEditedWallCount}', style: const TextStyle(color: Colors.white70),),
+              child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Bricks: ${value.bricksEditedWallCount}', style: const TextStyle(color: Colors.white70),),
+                ],
+              ),
             );}),
 
       ],

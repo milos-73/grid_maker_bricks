@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grid_maker_bricks/hex_color.dart';
+import 'package:grid_maker_bricks/provider_color.dart';
 import 'package:grid_maker_bricks/reset_editor.dart';
 import 'package:grid_maker_bricks/walls.dart';
+import 'package:provider/provider.dart';
 
 import 'edit_wall.dart';
 import 'list_of_walls.dart';
@@ -14,7 +16,6 @@ class EditButtons extends StatelessWidget {
     super.key,
     this.wallNumber,
   });
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,6 +47,7 @@ class EditButtons extends StatelessWidget {
                   child: ElevatedButton(onPressed: (){
 
                     BrickWalls().resetEditedWall();
+                    Provider.of<BrickColorNumber>(context,listen: false).bricksEditedWallCount = 0;
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ResetEditor(wallNumber: wallNumber)));
                   },
 
@@ -63,7 +65,6 @@ class EditButtons extends StatelessWidget {
                 ),
               ],
             ),
-
           ],
 
         ),

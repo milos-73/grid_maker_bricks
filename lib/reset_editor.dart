@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:grid_maker_bricks/provider_color.dart';
+import 'package:provider/provider.dart';
 
 import 'color_buttons.dart';
 import 'edit_wall_tiles.dart';
@@ -25,6 +27,17 @@ class _ResetEditorState extends State<ResetEditor> {
     return Scaffold(backgroundColor: HexColor('#ffe7d9'),
       appBar: AppBar(backgroundColor: HexColor('#214001'),
         title: const Text('Edit Wall',style: TextStyle(color: Colors.white70),),
+        actions: [
+          Consumer<BrickColorNumber>(builder: (context, value, child){
+            return Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Bricks: ${value.bricksEditedWallCount}', style: const TextStyle(color: Colors.white70),),
+                ],
+              ),
+            );}),
+        ],
         leading: IconButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListWalls()));} , icon: const FaIcon(FontAwesomeIcons.arrowLeft, color: Colors.white70,size: 15,)),
       ),
       body: SingleChildScrollView(

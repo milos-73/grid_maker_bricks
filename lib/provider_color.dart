@@ -8,6 +8,8 @@ class BrickColorNumber extends ChangeNotifier {
   void setBrickColor(int? value,) {
     index = value;
 
+    print('PROVIDER FARBA: ${value}');
+
     notifyListeners();
   }
 

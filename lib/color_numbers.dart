@@ -233,6 +233,46 @@ class ColorNumbers {
         String brickColor = '#1a1b20';
         return brickColor;
 
+      case 73:
+        String brickColor = '#ffeade';
+        return brickColor;
+      case 74:
+        String brickColor = '#ffeade';
+        return brickColor;
+      case 75:
+        String brickColor = '#ffeade';
+        return brickColor;
+      case 76:
+        String brickColor = '#ffeade';
+        return brickColor;
+
+      case 84:
+        String brickColor = '#012b2f';
+        return brickColor;
+      case 85:
+        String brickColor = '#2f2501';
+        return brickColor;
+      case 86:
+        String brickColor = '#1a1b20';
+        return brickColor;
+      case 87:
+        String brickColor = '#012802';
+        return brickColor;
+      case 88:
+        String brickColor = '#25011b';
+        return brickColor;
+
+      case 89:
+        String brickColor = '#ffeade';
+        return brickColor;
+
+        case 90:
+        String brickColor = '#000000';
+        return brickColor;
+      case 91:
+        String brickColor = '#ffffff';
+        return brickColor;
+
 
       default:
         String brickColor = '';

@@ -22,21 +22,25 @@ class _ColorListState extends State<ColorList> {
   ColorNumbers colorNumbers = ColorNumbers();
 
   void setColor(int index){
-    setState(() {
-      activeColor = index;
-    });
 
-    Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(index);
+      setState(() {
+        activeColor = index;
+      });
+      Provider.of<BrickColorNumber>(context,listen: false).setBrickColor(index);
 
 
-  }
+   }
 
   @override
   Widget build(BuildContext context) {
+     return ListTile(
+      tileColor: (widget.indexNo) < 77 ? HexColor(colorNumbers.getColor(widget.indexNo)) : HexColor(colorNumbers.getColor((widget.indexNo) + 7)),
+      onTap: () {
 
-    return ListTile(
-      tileColor: HexColor(colorNumbers.getColor(widget.indexNo)),
-      onTap: () {setColor(widget.indexNo);},
+        if ((widget.indexNo) < 77){setColor(widget.indexNo);print('${widget.indexNo}');} else {setColor((widget.indexNo) + 7);print('${widget.indexNo+7}');}}
+
+        //(widget.indexNo) < 77 ? setColor(widget.indexNo) : setColor((widget.indexNo) + 7);},
+
     );
   }
 }

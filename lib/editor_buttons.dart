@@ -27,14 +27,19 @@ class EditButtons extends StatelessWidget {
               children: [
                 SizedBox(width: 130, height: 40,
                   child: ElevatedButton(onPressed: (){
-                    brickWalls.saveEditedWallAsNew();},style: ElevatedButton.styleFrom(
+                    brickWalls.saveEditedWallAsNew();
+                    var snackWallSaved = SnackBar(content: const Text('Your wall is now saved as NEW wall.'),backgroundColor: HexColor('#2E5902'), elevation: 10,behavior: SnackBarBehavior.floating,margin: const EdgeInsets.all(5), );
+                    ScaffoldMessenger.of(context).showSnackBar(snackWallSaved);},style: ElevatedButton.styleFrom(
                     backgroundColor: HexColor('#193C40'),
                   ), child: const Text('Save as new',style: TextStyle(color: Colors.white70),),),
                 ),
 
                 SizedBox(width: 130, height: 40,
                   child: ElevatedButton(onPressed: (){
-                    brickWalls.saveEditedWall(wallNumber!);},style: ElevatedButton.styleFrom(
+                    brickWalls.saveEditedWall(wallNumber!);
+                    var snackWallSaved = SnackBar(content: const Text('Your wall is saved now.'),backgroundColor: HexColor('#2E5902'), elevation: 10,behavior: SnackBarBehavior.floating,margin: const EdgeInsets.all(5), );
+                    ScaffoldMessenger.of(context).showSnackBar(snackWallSaved);
+                    },style: ElevatedButton.styleFrom(
                     backgroundColor: HexColor('#193C40'),
                   ), child: const Text('Save',style: TextStyle(color: Colors.white70),),),
                 )

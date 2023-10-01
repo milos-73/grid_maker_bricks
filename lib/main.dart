@@ -111,7 +111,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     Column(children: [
                       SizedBox(width: 100, height: 40,
                         child: ElevatedButton(onPressed: (){
-                          brickWalls.saveWall();},
+                          brickWalls.saveWall();
+                          var snackWallSaved = SnackBar(content: const Text('Your wall is saved now.'),backgroundColor: HexColor('#2E5902'), elevation: 10,behavior: SnackBarBehavior.floating,margin: const EdgeInsets.all(5), );
+                          ScaffoldMessenger.of(context).showSnackBar(snackWallSaved);
+                              },
                             style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),backgroundColor: HexColor(('#193C40'))),child: const Text('Save', style: TextStyle(color: Colors.white70),)),
                         ),
                       ],)

@@ -42,27 +42,42 @@ class _EditWallTileState extends State<EditWallTile> {
 
 
 
-    return ListTile(
-      shape: const BeveledRectangleBorder(side: BorderSide(color: Colors.black,width: 0.2)),
-      tileColor: _color == true && Provider.of<BrickColorNumber>(context, listen: false).index == 0 && !indexList.contains(widget.index) && widget.colorNumber! == 0
-          ? HexColor('#d6d6d4')
-          : _color == true && Provider.of<BrickColorNumber>(context, listen: false).index == 0 && indexList.contains(widget.index) && widget.colorNumber! == 0
-          ? HexColor('#cececc')
+    return
+     _color == true && _inicialization == true && widget.colorNumber == 84
+          ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/noBreak1.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {_inicialization = false; setState(() {_color = !_color!;});brickWalls.addEditedBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricksOnEditedWall(context);}),)
+          :  _color == true && _inicialization == true && widget.colorNumber == 85
+          ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/noBreak2.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {_inicialization = false; setState(() {_color = !_color!;});brickWalls.addEditedBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricksOnEditedWall(context);}),)
+          :  _color == true && _inicialization == true && widget.colorNumber == 86
+          ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/noBreak3.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {_inicialization = false; setState(() {_color = !_color!;});brickWalls.addEditedBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricksOnEditedWall(context);}),)
+          :  _color == true && _inicialization == true && widget.colorNumber == 87
+          ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/noBreak4.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {_inicialization = false; setState(() {_color = !_color!;});brickWalls.addEditedBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricksOnEditedWall(context);}),)
+          :  _color == true && _inicialization == true && widget.colorNumber == 88
+          ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/noBreak5.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {_inicialization = false; setState(() {_color = !_color!;});brickWalls.addEditedBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricksOnEditedWall(context);}),)
+          :  _color == true && _inicialization == true && widget.colorNumber == 90
+          ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/crackedBrick.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {_inicialization = false; setState(() {_color = !_color!;});brickWalls.addEditedBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricksOnEditedWall(context);}),)
+
           : _color == true && _inicialization == true
-          ? HexColor(colorNumbers.getColor(widget.colorNumber!)) 
-          : HexColor(colorNumbers.getColor(Provider.of<BrickColorNumber>(context, listen: false).index ?? 0)),
-      onTap: () {
-        print('_color: ${_color}');
-        _inicialization = false;
-        setState(() {_color = !_color!;});
-        brickWalls.addEditedBrickTypeToList(context, widget.index);
-        brickWalls.countNumberOfBricksOnEditedWall(context);
+     ? ListTile(shape: const BeveledRectangleBorder(side: BorderSide(color: Colors.black,width: 0.2)),tileColor: HexColor(colorNumbers.getColor(widget.colorNumber!)), onTap: () {_inicialization = false; setState(() {_color = !_color!;});brickWalls.addEditedBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricksOnEditedWall(context);}, )
 
-        print('widget.colorNumber: ${widget.colorNumber}');
-        print('_color: ${_color}');
-        print('Provider.of<BrickColorNumber>(context, listen: false).index: ${Provider.of<BrickColorNumber>(context, listen: false).index}');
 
-      },
-    );
-  }
+          :   _color == true && Provider.of<BrickColorNumber>(context, listen: false).index == 0 && !indexList.contains(widget.index)
+          ? ListTile(shape: const BeveledRectangleBorder(side: BorderSide(color: Colors.black26,width: 0)),tileColor: HexColor('#d6d6d4'), onTap: () {setState(() {_color = !_color!;});brickWalls.addBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricks(context);},)
+          : _color == true && Provider.of<BrickColorNumber>(context, listen: false).index == 0 && indexList.contains(widget.index)
+          ? ListTile(shape: const BeveledRectangleBorder(side: BorderSide(color: Colors.black26,width: 0)),tileColor: HexColor('#cececc'), onTap: () {setState(() {_color = !_color!;});brickWalls.addBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricks(context);},)
+          : Provider.of<BrickColorNumber>(context, listen: false).index == 84
+          ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/noBreak1.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {setState(() {_color = !_color!;});brickWalls.addBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricks(context);},))
+          : Provider.of<BrickColorNumber>(context, listen: false).index == 85
+          ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/noBreak2.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {setState(() {_color = !_color!;});brickWalls.addBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricks(context);},))
+          : Provider.of<BrickColorNumber>(context, listen: false).index == 86
+          ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/noBreak3.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {setState(() {_color = !_color!;});brickWalls.addBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricks(context);},))
+          : Provider.of<BrickColorNumber>(context, listen: false).index == 87
+          ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/noBreak4.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {setState(() {_color = !_color!;});brickWalls.addBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricks(context);},))
+          : Provider.of<BrickColorNumber>(context, listen: false).index == 88
+          ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/noBreak5.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {setState(() {_color = !_color!;});brickWalls.addBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricks(context);},))
+          : Provider.of<BrickColorNumber>(context, listen: false).index == 90
+          ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/crackedBrick.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {setState(() {_color = !_color!;});brickWalls.addBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricks(context);},))
+          : ListTile(shape: const BeveledRectangleBorder(side: BorderSide(color: Colors.black26,width: 0)),tileColor: HexColor(colorNumbers.getColor(Provider.of<BrickColorNumber>(context, listen: false).index ?? 0)),onTap: () {setState(() {_color = !_color!;});brickWalls.addBrickTypeToList(context, widget.index);brickWalls.countNumberOfBricks(context);},);
+
+ }
+
 }

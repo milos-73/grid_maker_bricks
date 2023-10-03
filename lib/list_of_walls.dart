@@ -27,6 +27,8 @@ class _ListWallsState extends State<ListWalls> {
     int? count = prefs.getInt('wallNumber');
    setState(() {
      wallsCount = count;
+
+     print('${count}');
    });
 
   }
@@ -42,13 +44,16 @@ class _ListWallsState extends State<ListWalls> {
     return Scaffold(appBar: AppBar(
       leading: IconButton(onPressed: (){Navigator.pop(context);} , icon: const FaIcon(FontAwesomeIcons.arrowLeft, color: Colors.white70,size: 15,)),
       title: const Text('List of boards', style: TextStyle(color: Colors.white70),), backgroundColor:HexColor('#214001'),),backgroundColor: HexColor('#ffe7d9'),
-      body: ListView.builder(
+      body:
+          wallsCount != null ?
+      ListView.builder(
           itemCount: wallsCount,
           itemBuilder:(context,index){
             return SizedBox(height:MediaQuery.of(context).size.height * 0.25,
                 child: WallsItems(wallNumber: index));
           }
       )
+     : const Center(child: Text('No walls created yet'))
       );
 
   }

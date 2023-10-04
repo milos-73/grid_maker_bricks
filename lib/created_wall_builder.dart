@@ -21,7 +21,7 @@ class CreatedWallBuilder extends StatelessWidget {
         ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/noBreak1.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {},))
         : (wall?[(index / 11).floor()][index % 11]) == 95
         ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/noBreak2.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {},))
-        : (wall?[(index / 11).floor()][index % 11]) == 99
+        : (wall?[(index / 11).floor()][index % 11]) == 96
         ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/noBreak3.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {},))
         : (wall?[(index / 11).floor()][index % 11]) == 97
         ? Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/noBreak4.png'),fit: BoxFit.fill)), child: ListTile(onTap: () {},))

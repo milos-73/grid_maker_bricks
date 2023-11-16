@@ -69,7 +69,7 @@ class _WallsItemsState extends State<WallsItems> {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     sharedWall = prefs.getString('wall${widget.wallNumber}') ?? "";
-    return sharedWall;
+    return 'WALL: $wallNumber  ${sharedWall!}';
   }
 
   @override
